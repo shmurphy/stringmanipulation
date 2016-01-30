@@ -1,0 +1,128 @@
+import java.util.Random;
+
+/*
+ * TCSS 342
+ * Assignment 2 - Evolved Names
+ */
+
+
+/**
+ * Represents a String in my "world" for an evolutionary system.
+ * 
+ * @author Shannon Murphy
+ * @version 4/13/15
+ *
+ */
+public class Genome {
+	String myString;
+	double myRate;
+	char[] myChars;
+	String myTarget;
+	
+	public Genome(final double theMutationRate) {
+		myString = "SHANNON";
+		myChars = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+			'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', '-'};
+		myRate = theMutationRate;
+	}
+	
+	public Genome(final Genome theGene) {
+		myString = theGene.myString;
+		myRate = theGene.myRate;
+	}
+	
+	public void setTarget(final String theTarget) {
+		myTarget = theTarget;
+	}
+	
+	public void mutate() {
+		Random rand = new Random();
+	
+		double addChance = Math.random();
+		if (addChance < myRate) {
+			addCharacter(rand);
+		}
+
+		double removeChance = Math.random();
+		if (removeChance < myRate) {
+			if (myString.length() >= 2) {
+				removeCharacter(rand);
+			}
+		}
+		
+		double replaceChance = Math.random();
+		if (replaceChance < myRate) {
+			replaceCharacter(rand);
+		}
+	}
+	
+	public void crossover(Genome theOther) {
+		String parentString = "";
+		String newString = "";
+		Random rand = new Random();
+		boolean finished = false;
+		int index = 0;
+		while (!finished) {
+			int genome = rand.nextInt(2);
+			if (genome == 0) {
+				parentString = myString;
+			} else {
+				parentString = theOther.toString();
+			}
+			if (index < parentString.length()) {
+				newString += parentString.charAt(index);
+			} else if (index >= parentString.length()) {
+				finished = true;
+			}
+			index++;
+//			System.out.println("The parent: " + parentString);
+
+		}
+		
+
+		System.out.println("New string: " + newString);
+		
+		
+	}
+	
+	public Integer fitness() {
+		int n = myString.length();
+		int m = myTarget.length();
+		int l = Math.max(n,  m);
+		int f = Math.abs(m-n);
+		
+		for (int i = 1; i < )
+//		System.out.println(f);
+		return f;
+	}
+	
+	public String toString() {
+		return myString;
+	}
+	
+	private void addCharacter(final Random theRand) {
+		int randAddIndex = theRand.nextInt(myString.length() + 1);
+		int randCharIndex = theRand.nextInt(28);
+		char randChar = myChars[randCharIndex];
+//		System.out.println("Add index: " + randAddIndex);
+		myString = myString.substring(0, randAddIndex) + randChar + myString.substring(randAddIndex);
+//		System.out.println("Added: " + myString);
+	}
+	
+	private void removeCharacter(final Random theRand) {
+		int randRemoveIndex = theRand.nextInt(myString.length());
+//		System.out.println("Remove index: " + randRemoveIndex);
+		myString = myString.substring(0, randRemoveIndex) + myString.substring(randRemoveIndex+1);
+//		System.out.println("Removed: " + myString);
+	}
+	
+	private void replaceCharacter(final Random theRand) {
+		int randRemoveIndex = theRand.nextInt(myString.length());
+		
+		int replaceCharIndex = theRand.nextInt(28);
+		char replaceChar = myChars[replaceCharIndex];
+//		System.out.println("Index removed: " + randRemoveIndex + " Replacement: " + replaceChar);
+		
+		myString = myString.substring(0, randRemoveIndex) + replaceChar + myString.substring(randRemoveIndex+1);
+	}
+}

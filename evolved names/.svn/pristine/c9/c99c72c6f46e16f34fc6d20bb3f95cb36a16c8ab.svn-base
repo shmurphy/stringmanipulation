@@ -1,0 +1,48 @@
+import java.util.LinkedList;
+import java.util.List;
+
+/*
+ * TCSS 342
+ * Assignment 2 - Evolved Names
+ */
+
+/**
+ * Contains a list of Genomes representing all the strings in my "world"
+ * for an evolutionary system.
+ * 
+ * @author shmurphy
+ *
+ */
+public class Population {
+	final private String myTarget = "Shannon";
+	Genome myMostFit;
+	private List<Genome> myGenomes;
+	private Double myRate;
+	private Integer myPopulationSize;
+	
+	public Population(final Integer theNumGenomes, final Double theMutationRate) {
+		myGenomes = new LinkedList<>();
+		
+		for (int i = 0; i < theNumGenomes; i++) {
+			myGenomes.add(new Genome(theMutationRate));
+		}
+		System.out.println(myGenomes);
+		
+//		myRate = theMutationRate;
+//		myPopulationSize = theNumGenomes;
+	}
+	
+	public void day() {
+		
+	}
+	
+	public String toString() {
+		int i = 0;
+		String result = "";
+		while (i < myGenomes.size()) {
+			result += myGenomes.get(i);
+			i++;
+		}
+		return result;
+	}
+}

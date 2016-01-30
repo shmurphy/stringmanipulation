@@ -1,0 +1,45 @@
+import java.util.Random;
+
+/*
+ * TCSS 342
+ * Assignment 2 - Evolved Names
+ */
+
+/**
+ * Controller for the evolution.
+ * 
+ * @author Shannon Murphy
+ * @version 4/13/15
+ *
+ */
+public class Main {
+
+	/**
+	 * Driver for the Population class.
+	 * 
+	 * @param args Command line arguments.
+	 */
+	public static void main(String[] args) {
+//		Population p = new Population(100, 0.05);
+//		String target = "Shannon Nicole Murphy";
+		
+//		Random rand = new Random();
+//		System.out.println(rand.nextDouble());
+		
+//		double d = Math.random();
+//		System.out.println(d);
+		
+		Genome g = new Genome(0.5);
+		Genome g2 = new Genome(0.5);
+		g.setTarget("SHANNON");
+		System.out.println("G: " + g);
+//		System.out.println("G2: " + g2);
+		System.out.println("G fitness: " + g.fitness());
+//		g.mutate();
+//		System.out.println("G mutate: " + g);
+//		g.crossover(g2);
+//		System.out.println("G cross: " + g);
+
+	}
+
+}
